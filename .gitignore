@@ -1,0 +1,13 @@
+# Local credentials and runtime data
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+backend/data/
+backend/uploads/
+*.log

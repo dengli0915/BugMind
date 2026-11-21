@@ -1,0 +1,26 @@
+# ============================================================================
+#  BugMind 后端依赖清单（本地开发与生产部署共用同一份）
+#
+#  安装：
+#     Windows（本地）：.venv\Scripts\pip.exe install -r requirements.txt
+#     Linux（生产  ）：/opt/bugmind-backend/.venv/bin/pip install -r requirements.txt
+#
+#  版本说明
+#   - 下列版本为本机实测通过（Python 3.11.4）的版本，在服务器 Python 3.10 上
+#     同样可安装（除非另有说明，均有 cp310 manylinux 预编译轮子，无需编译环境）。
+#   - 用 == 精确锁定，保证「本机跑通 = 服务器跑通」；升级依赖时改版本号后
+#     重新执行部署/update.sh 即可，避免哪天 pip 拉到新版依赖导致行为漂移。
+#   - uvicorn[standard] 会带入 uvloop / httptools / websockets 等可选组件；
+#     若服务器没有编译环境且安装失败，可退回 `uvicorn==0.54.0`（纯 Python 实现，
+#     功能不受影响，只是并发性能略低）。
+#   - 本服务不使用数据库驱动：数据以 JSON 文件存放于后端 data/ 目录，
+#     因此不需要 sqlalchemy / psycopg2 等数据库依赖。
+#   - 本服务不使用表单上传（附件以 base64 放在 JSON 请求体），
+#     因此不需要 python-multipart。
+# ============================================================================
+
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+httpx==0.28.1
+pydantic==2.14.3
+python-dotenv==1.2.4
